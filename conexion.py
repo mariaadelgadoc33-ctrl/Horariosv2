@@ -11,7 +11,7 @@ TABLE_IDS = {
     "estudiante": "819535",
     "Horarios": "819596",
     "materia": "819630",
-    "bloque": "936697",
+    "Bloque": "936697",
     "profesores": "936712",
     "usuario": "936720"
 }
@@ -23,7 +23,7 @@ def get_baserow_data(table_id):
     # Construcción precisa de la URL de filas
     url = f"{URL_BASE}/{table_id}/?user_field_names=true"
     #url = f"https://baserow.io/{table_id}/?user_field_names=true" /api/database/rows/table/
-    print(f"\n--- URL GENERADA: {url} ---")
+    #print(f"\n--- URL GENERADA: {url} ---")
     try:
         response = requests.get(url, headers=headers)
         if response.status_code == 200:

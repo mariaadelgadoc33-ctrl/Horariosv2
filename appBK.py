@@ -70,15 +70,4 @@ elif choice == "Usuarios":
                 else:
                     st.warning("Por favor rellena todos los campos")
 
-    # --- TABLA DE USUARIOS EXISTENTES ---
-    st.write("---")
-    st.write("### Usuarios Registrados")
-    usuarios_lista = get_baserow_data(TABLE_IDS["usuario"])
     
-    if usuarios_lista:
-        df_usuarios = pd.DataFrame(usuarios_lista)
-        # Mostramos solo columnas importantes para seguridad
-        columnas_ver = [col for col in ['id', 'Nombre', 'Username', 'Rol'] if col in df_usuarios.columns]
-        st.dataframe(df_usuarios[columnas_ver], use_container_width=True)
-    else:
-        st.warning("No hay usuarios registrados aún.")
