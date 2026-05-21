@@ -41,8 +41,8 @@ def validar_usuario_baserow(cedula, rol):
     """
     Busca en la tabla de usuarios de Baserow un registro que coincida
     con el correo, la contraseña y el rol proporcionado.
-    """
-    # Usamos el ID de la tabla de usuarios que ya tienes (936720)
+     """
+ # Usamos el ID de la tabla de usuarios que ya tienes (936720)
     id_tabla_usuario = "936720"
     url = f"{URL_BASE}/{id_tabla_usuario}/?user_field_names=true"
     
@@ -60,7 +60,7 @@ def validar_usuario_baserow(cedula, rol):
                 
                 # Comprobación exacta
                 if cedula == cedula.strip() and b_rol == rol:
-                    return True # Credenciales correctas
+                 return True # Credenciales correctas
                     
             return False # No se encontró coincidencia
         else:
@@ -142,6 +142,7 @@ def validar_profesores_baserow(cedula,):
     
 
     
+
 
 
 
