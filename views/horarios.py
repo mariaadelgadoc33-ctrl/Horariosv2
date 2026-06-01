@@ -175,7 +175,7 @@ if datos_bloques:
         st.markdown("<br>", unsafe_allow_html=True)
         # Botón nativo de Streamlit que sí descarga en cualquier celular de forma obligatoria
         st.download_button(
-            label="📸 Descargar Horario como Imagen (Para el Celular)",
+            label="📸 Descargar Horario como Imagen",
             data=img_bytes,
             file_name="Mi_Horario_Escolar.png",
             mime="image/png",

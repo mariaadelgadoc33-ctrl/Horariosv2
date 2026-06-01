@@ -54,12 +54,12 @@ def validar_usuario_baserow(cedula, rol):
             
             for u in usuarios:
                 # Obtenemos los valores de Baserow (ajusta los nombres si son distintos)
-                cedula = str(u.get('cedula', '')).strip()
+                Cedula = str(u.get('Cedula', '')).strip()
                 #b_pass = str(u.get('Password', '')).strip()
                 b_rol = str(u.get('Rol', '')).strip()
                 
                 # Comprobación exacta
-                if cedula == cedula.strip() and b_rol == rol:
+                if Cedula == Cedula.strip() and b_rol == rol:
                  return True # Credenciales correctas
                     
             return False # No se encontró coincidencia
@@ -73,7 +73,7 @@ def validar_usuario_baserow(cedula, rol):
 
 
 
-def validar_estudiante_baserow(cedula,):
+def validar_estudiante_baserow(Cedula,):
     """
     Busca en la tabla de usuarios de Baserow un registro que coincida
     con el correo, la contraseña y el rol proporcionado.
@@ -90,13 +90,13 @@ def validar_estudiante_baserow(cedula,):
             
             for u in usuarios:
                 # Obtenemos los valores de Baserow (ajusta los nombres si son distintos)
-                cedula = str(u.get('cedula', '')).strip()
+                Cedula_baserow = str(u.get('Cedula', '')).strip()
                 #b_pass = str(u.get('Password', '')).strip()
                 
                 
-                # Comprobación exacta
-                if cedula == cedula.strip():
-                    return True # Credenciales correctas
+                # Ahora sí comparas la que trajiste con la que el usuario escribió:
+                if Cedula_baserow == Cedula.strip():
+                  return True
                     
             return False # No se encontró coincidencia
         else:
@@ -107,7 +107,7 @@ def validar_estudiante_baserow(cedula,):
         return False
     
 
-def validar_profesores_baserow(cedula,):
+def validar_profesores_baserow(Cedula,):
     """
     Busca en la tabla de usuarios de Baserow un registro que coincida
     con el correo, la contraseña y el rol proporcionado.
@@ -124,12 +124,12 @@ def validar_profesores_baserow(cedula,):
             
             for u in usuarios:
                 # Obtenemos los valores de Baserow (ajusta los nombres si son distintos)
-                cedula = str(u.get('cedula', '')).strip()
+                Cedula = str(u.get('Cedula', '')).strip()
                 #b_pass = str(u.get('Password', '')).strip()
                 
                 
                 # Comprobación exacta
-                if cedula == cedula.strip():
+                if Cedula == Cedula.strip():
                     return True # Credenciales correctas
                     
             return False # No se encontró coincidencia
