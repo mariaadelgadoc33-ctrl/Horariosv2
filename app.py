@@ -2,6 +2,12 @@ import streamlit as st
 import requests# Función para alumnos/profes
 from conexion import validar_usuario_baserow, validar_estudiante_baserow, validar_profesores_baserow
 
+
+
+
+# Primero definimos la configuración de la página para evitar errores en Streamlit
+st.set_page_config(page_title="Sistema Telemática", layout="wide")
+
 st.markdown("""
     <style>
         /* 1. Fondo Principal (Azul Hielo) */
@@ -71,13 +77,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-
-
-
-
-
-st.set_page_config(page_title="Sistema Telemática", layout="wide")
-
 # 1. Definir la Clave Maestra del Administrador
 CLAVE_MAESTRA_ADMIN = "Admin1234" # Tú puedes cambiarla aquí
 
@@ -107,7 +106,7 @@ if not st.session_state.autenticado:
                 st.session_state.rol = "Administrador"
                 st.rerun()
             else:
-                st.error("Clave Maestra Incorrecta")
+                st.error("Clactive Maestra Incorrecta")
 
     else:
     # Estudiantes y Profesores piden lo mismo
@@ -116,7 +115,7 @@ if not st.session_state.autenticado:
     #clave = st.text_input("Contraseña", type="password")
 
     # PRIMERO: Creamos el botón. 
-         if st.button(f"Entrar como {rol_elegido }"):
+         if st.button(f"Entrar como {rol_elegido }", key=f"btn_{rol_elegido}"):
         
         # LUEGO: Verificamos si el campo está vacío (nota la sangría)
            if not cedula: 
@@ -126,7 +125,6 @@ if not st.session_state.autenticado:
         # ACCIÓN: Si NO está vacío, procedemos con la validación normal
            else:
             # Validamos contra la base de datos de Baserow
-            es_valido = validar_estudiante_baserow(cedula)
             es_valido = validar_estudiante_baserow(cedula)
             
             if es_valido:
@@ -157,46 +155,4 @@ else:
     
     pg = st.navigation(menu)
     pg.run()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

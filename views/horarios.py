@@ -7,11 +7,6 @@ from conexion import get_baserow_data, TABLE_IDS , headers, URL_BASE
 
 
 
-
-
-
-
-
 st.title("🗓️ Gestión de Horarios ")
 
 # 1. CARGA DE DATOS
@@ -102,10 +97,6 @@ if datos_bloques:
                 st.success("✅ ¡Horario actualizado en tiempo real!")
                 st.rerun()
 
-
-
-        
-
     # --- VISTA PARA ESTUDIANTES ---
     else:
         # Despliegue de notificaciones push dinámicas arriba del horario si existen
@@ -143,5 +134,53 @@ if datos_bloques:
             html += "</tr>"
         html += "</tbody></table>"
         st.markdown(html, unsafe_allow_html=True)
+        
+        # INSERCIÓN QUIRÚRGICA SEGURA: Conversión nativa de tabla a Imagen PNG
+        import matplotlib.pyplot as plt
+        import io
+        
+        # Creamos la imagen a partir del DataFrame
+        fig, ax = plt.subplots(figsize=(10, len(df_horario) * 0.6 + 1))
+        ax.axis('off')
+        
+        # Construimos la estructura del texto para la imagen incluyendo los comentarios
+        tabla_datos = []
+        for hora, fila in df_horario.iterrows():
+            nueva_fila = [hora]
+            for d in dias:
+                mat = fila[d]
+                com = df_comentarios.at[hora, d]
+                texto_celda = f"{mat}\n(⚠️ {com})" if com and com != "None" and com != "" else mat
+                nueva_fila.append(texto_celda)
+            tabla_datos.append(nueva_fila)
+            
+        columnas_img = ["Hora"] + dias
+        tabla_vis = ax.table(cellText=tabla_datos, colLabels=columnas_img, loc='center', cellLoc='center')
+        tabla_vis.auto_set_font_size(False)
+        tabla_vis.set_fontsize(10)
+        tabla_vis.scale(1.2, 2.2)
+        
+        # Estilo de la cabecera (Azul Claro) en la imagen
+        for k, cell in tabla_vis.get_celld().items():
+            if k[0] == 0:
+                cell.set_facecolor('#ADD8E6')
+                cell.get_text().set_weight('bold')
+                
+        # Guardar en memoria interna como bytes
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png", bbox_inches="tight", dpi=200)
+        img_bytes = buf.getvalue()
+        plt.close(fig)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        # Botón nativo de Streamlit que sí descarga en cualquier celular de forma obligatoria
+        st.download_button(
+            label="📸 Descargar Horario como Imagen (Para el Celular)",
+            data=img_bytes,
+            file_name="Mi_Horario_Escolar.png",
+            mime="image/png",
+            use_container_width=True,
+            key="btn_descarga_imagen_real"
+        )
 else:
     st.info("No hay horas configuradas.")
